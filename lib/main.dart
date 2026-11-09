@@ -300,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen>{
             _nav(Icons.info_outline,'حول التطبيق',()=>showAboutDialog(context:context,applicationName:'أذكاري',children:[const Text('الأذكار تعمل دون إنترنت. التنبيهات تتطلب إذن الهاتف ومحرك صوت عربيًا.')]))
           ])):const SizedBox.shrink()),
       ])))),
-    ));
+    );
   }
   Widget _nav(IconData icon,String name,VoidCallback tap)=>InkWell(onTap:tap,child:Column(mainAxisSize:MainAxisSize.min,children:[
     Icon(icon,color:gold,size:22),Text(name,style:const TextStyle(color:cream,fontSize:10))]));
