@@ -1,13 +1,30 @@
-# مشروع أذكاري - جاهز للبناء باستخدام GitHub Actions
+# أذكاري — تحديث الواجهة والتذكيرات (نسخة تجريبية)
 
-البيانات تجريبية وجزئية، وليست نقلًا كاملًا لمحتوى الموقع. يوجد ملف workflow في `.github/workflows/build-apk.yml` لبناء ملف APK على GitHub.
+يحتوي هذا التحديث على 27 تصنيفًا، منها 71 نصًا فعليًا؛ بعض الأقسام ما زالت فارغة. عدّاد كل ذكر دائرة واحدة يظهر فيها العدد فقط؛ ضغطة للزيادة وضغطة مطوّلة للتصفير. الزخارف مرسومة داخل Flutter بدون صور خارجية. قائمة التنقل السفلي مخفية، ولا يظهر إلا سهمان لفتحها.
 
-## من موبايل أندرويد فقط
-1. أنشئ مستودع GitHub مع README أولي، وافتح Codespaces من زر Code ثم Codespaces ثم Create codespace on main.
-2. في Codespaces افتح قائمة Explorer > Upload Files وارفع ZIP الخاص بالمشروع في جذر المستودع.
-3. افتح Terminal وشغّل: `unzip -o azkar_mobile_build.zip` ثم `rm azkar_mobile_build.zip`.
-4. نفّذ: `git add -A && git commit -m "Add Flutter app and Android APK workflow" && git push`.
-5. ارجع لصفحة المستودع > Actions > Build Android APK، وافتح التشغيل الناتج، ثم حمّل artifact باسم azkar-android-apk.
-6. فك ضغط artifact ثم اضغط app-release.apk لتثبيته.
+يتضمن تذكيرات أسبوعية للنوم والاستيقاظ باستخدام إشعارات أندرويد، مع «استيقظت» و«غفوة» للاستيقاظ، و«الاستعداد للنوم» و«تذكيري لاحقًا» للنوم. عند فتح الإشعار تظهر الخيارات؛ الضغط على بدء الأذكار يفتح القسم ويشغّل قراءة آلية باللغة العربية عبر محرك هاتف المستخدم (ar-SA). التذكيرات ليست منبّه شاشة كاملة، وليست مضمونة في الدقيقة نفسها في ظروف توفير البطارية؛ هذه نسخة تجريبية تحتاج اختبارًا على جهاز أندرويد حقيقي. القراءة الآلية لا تضمن جودة النطق في كل جهاز، وبالأخص الآيات القرآنية؛ راجع النص ولا تعتمد عليها كبديل لتلاوة متقنة.
 
-قد تظهر خطوات بشكل مختلف قليلًا على نسخة الهاتف من GitHub. قد يلزم تفعيل وضع سطح المكتب في المتصفح.
+## إضافة الملفات إلى مشروع GitHub الموجود
+
+1. افتح مجلد مشروع `azkar-app` في VS Code.
+2. انسخ المجلدات والملفات من هذا ZIP إلى جذر المشروع مع **استبدال** الملفات المتطابقة: `lib/main.dart`, `assets/data/azkar.json`, `pubspec.yaml`, `.github/workflows/build-apk.yml`, `tools/patch_android.py`.
+3. من Terminal داخل المشروع شغّل:
+
+```bash
+git add .
+git commit -m "Add elegant UI counters and sleep wake reminders"
+git push
+```
+
+4. افتح GitHub > Actions > Build Android APK، وبعد نجاح البناء حمّل artifact `azkar-android-apk`، وفك الضغط، وثبّت `app-release.apk`.
+
+## محليًا (إن كان Flutter مثبتًا)
+
+```bash
+flutter create --platforms=android --project-name azkar_companion .
+python tools/patch_android.py
+flutter pub get
+flutter run
+```
+
+تغيير ملفات `pubspec.yaml` يتطلب `flutter pub get` وإعادة البناء. لإجراء اختبار جاد للتذكيرات، افحص صلاحية الإشعارات وإعدادات توفير البطارية على الهاتف، وتأكد أن هناك صوتًا عربيًا مثبتًا في إعدادات Text-to-Speech.

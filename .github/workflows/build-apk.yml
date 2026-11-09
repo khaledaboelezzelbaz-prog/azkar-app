@@ -19,6 +19,8 @@ jobs:
           channel: stable
       - name: Generate Android project
         run: flutter create --platforms=android --project-name azkar_companion .
+      - name: Configure Android notifications
+        run: python3 tools/patch_android.py
       - name: Install dependencies
         run: flutter pub get
       - name: Build APK

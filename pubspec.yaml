@@ -1,13 +1,17 @@
 name: azkar_companion
-description: تطبيق أذكار عربي مع عداد تكرار وحفظ التقدم محليا
+description: تطبيق أذكاري - الأذكار والمنبه وتذكير النوم
 publish_to: none
-version: 0.1.0+1
+version: 0.3.0+3
 environment:
   sdk: '>=3.3.0 <4.0.0'
 dependencies:
   flutter:
     sdk: flutter
   shared_preferences: ^2.3.2
+  flutter_tts: ^4.2.5
+  flutter_local_notifications: ^17.2.4
+  flutter_timezone: ^3.0.1
+  timezone: ^0.9.4
 flutter:
   uses-material-design: true
   assets:
